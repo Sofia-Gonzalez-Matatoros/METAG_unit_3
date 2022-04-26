@@ -55,6 +55,7 @@ fastqc virome_R1_qfb_paired.fq -o virome_QF_Quality
 fastqc virome_R2_qfb_paired.fq -o virome_QF_Quality
 ```
 > INSERTAR IMÁGENES
+
 Se observa que las mejores son las obtenidas con MINLEN 70 (protocolo profe) en vez del que están en general en el manual
 #### 1.7. Eliminamos las lecturas que alineen con los genomas humano y phiX174 (Bowtie2)
 ```
@@ -76,7 +77,9 @@ Nótese que el índice human-phiX174 está subido a moodle.
 wc -l *clean.* | awk '{print $1/4}'
 ```
 > 80761
+> 
 > 80761
+> 
 > 161522
 
 ### 2. Ensamblado con SPAdes
