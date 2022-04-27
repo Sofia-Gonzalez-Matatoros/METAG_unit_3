@@ -39,7 +39,12 @@ mkdir virome_Quality
 fastqc virome_R1.fastq -o virome_Quality/
 fastqc virome_R2.fastq -o virome_Quality/
 ```
-> PONER LAS GRÁFICAS DEL HTML
+**Calidad de R1**
+![Screeshot](https://github.com/Sofia-Gonzalez-Matatoros/METAG_unit_3/blob/main/fotos.1.4/1.4/virome_R1.png)
+
+**Calidad de R2**
+![Screeshot](https://github.com/Sofia-Gonzalez-Matatoros/METAG_unit_3/blob/main/fotos.1.4/1.4/virome_R2.png)
+
 #### 1.5. Recortamos los extremos de baja calidad con Trimmomatic
 ```
 trimmomatic PE -phred33 virome_R1.fastq virome_R2.fastq virome_R1_qfa_paired.fq virome_R1_qfa_unpaired.fq virome_R2_qfa_paired.fq virome_R2_qfa_unpaired.fq SLIDINGWINDOW:4:15 MINLEN:36
@@ -54,7 +59,17 @@ fastqc virome_R2_qfa_paired.fq -o virome_QF_Quality
 fastqc virome_R1_qfb_paired.fq -o virome_QF_Quality
 fastqc virome_R2_qfb_paired.fq -o virome_QF_Quality
 ```
-> INSERTAR IMÁGENES
+**Calidad R1 SLIDINGWINDOW:4:15 MINLEN:36**
+![Screenshot](https://github.com/Sofia-Gonzalez-Matatoros/METAG_unit_3/blob/main/fotos.1.6/1.6/r1a.png)
+
+**Calidad R1 SLIDINGWINDOW:4:20 MINLEN:70**
+![Screenshot](https://github.com/Sofia-Gonzalez-Matatoros/METAG_unit_3/blob/main/fotos.1.6/1.6/r1b.png)
+
+**Calidad R2 SLIDINGWINDOW:4:15 MINLEN:36**
+![Screenshot](https://github.com/Sofia-Gonzalez-Matatoros/METAG_unit_3/blob/main/fotos.1.6/1.6/r2a.png)
+
+**Calidad R2 SLIDINGWINDOW:4:20 MINLEN:70**
+![Screenshot](https://github.com/Sofia-Gonzalez-Matatoros/METAG_unit_3/blob/main/fotos.1.6/1.6/r2b.png)
 
 Se observa que las mejores son las obtenidas con MINLEN 70 (protocolo profe) en vez del que están en general en el manual
 #### 1.7. Eliminamos las lecturas que alineen con los genomas humano y phiX174 (Bowtie2)
