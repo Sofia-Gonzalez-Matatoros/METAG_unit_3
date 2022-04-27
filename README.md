@@ -108,18 +108,29 @@ spades.py --meta -m 3 -t 2 -1 virome_clean.1.fq -2 virome_clean.2.fq -o virome_s
 ```
 grep -c '>' ./virome_spades_default/*.fasta
 ```
->
+> ./virome_spades_default/before_rr.fasta:4026
+> ./virome_spades_default/contigs.fasta:3973
+> ./virome_spades_default/scaffolds.fasta:3886
+
 ```
 grep -c '>' ./virome_spades_meta_33/*.fasta
 ```
->
+> ./virome_spades_meta_33/before_rr.fasta:7554
+> ./virome_spades_meta_33/contigs.fasta:6687
+> ./virome_spades_meta_33/first_pe_contigs.fasta:10295
+> ./virome_spades_meta_33/scaffolds.fasta:6425
+
 ```
-grep -c '>' ./virome_spades_meta_33/*.fasta
+grep -c '>' ./virome_spades_meta_21/*.fasta
 ```
->
+> ./virome_spades_meta_21/before_rr.fasta:9002
+> ./virome_spades_meta_21/contigs.fasta:7421
+> ./virome_spades_meta_21/first_pe_contigs.fasta:14591
+> ./virome_spades_meta_21/scaffolds.fasta:7142
+
 #### 2.2. Contamos el número de scaffolds
 ```
-grep '>' -m 5 ./virome_careful/*.fasta
+grep '>' -m 5 ./virome_spades_default/*.fasta
 grep '>' -m 5 ./virome_isolate/*.fasta
 ```
 ```
