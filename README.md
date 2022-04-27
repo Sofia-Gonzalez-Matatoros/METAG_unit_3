@@ -103,8 +103,8 @@ spades.py -m 3 -t 2 -1 virome_clean.1.fq -2 virome_clean.2.fq -o virome_spades_d
 spades.py --meta -m 3 -t 2 -1 virome_clean.1.fq -2 virome_clean.2.fq -o virome_spades_meta_33 -k33
 spades.py --meta -m 3 -t 2 -1 virome_clean.1.fq -2 virome_clean.2.fq -o virome_spades_meta_21 -k21
 ```
-#### 2.1. Contamos el número de contigs
-> he ejecutado hasta aquí
+#### 2.1. Contamos el número de contigs y scaffolds
+
 ```
 grep -c '>' ./virome_spades_default/*.fasta
 ```
@@ -128,17 +128,9 @@ grep -c '>' ./virome_spades_meta_21/*.fasta
 > ./virome_spades_meta_21/first_pe_contigs.fasta:14591
 > ./virome_spades_meta_21/scaffolds.fasta:7142
 
-#### 2.2. Contamos el número de scaffolds
+#### 2.2. Longitud y cobertura de los cotings
 ```
-grep '>' -m 5 ./virome_spades_default/*.fasta
-grep '>' -m 5 ./virome_isolate/*.fasta
-```
-```
-grep '>' ./virome_careful/scaffolds.fasta
-grep '>' ./virome_isolate/scaffolds.fasta
-```
-```
-python contigstats.py virome_*/*.fasta
+
 ```
 
 ### 3.Comparación de las estrategias de ensamblado con QUAST
