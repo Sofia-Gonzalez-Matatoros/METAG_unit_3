@@ -71,7 +71,8 @@ fastqc virome_R2_qfb_paired.fq -o virome_QF_Quality
 **Calidad R2 SLIDINGWINDOW:4:20 MINLEN:70**
 ![Screenshot](https://github.com/Sofia-Gonzalez-Matatoros/METAG_unit_3/blob/main/fotos.1.6/1.6/r2b.png)
 
-Se observa que las mejores son las obtenidas con MINLEN 70 (protocolo profe) en vez del que están en general en el manual
+Se observa que las lecturas con mejor calidad son las obtenidas con el protocolo de prácticas (SLIDINGWINDOW:4:20 MINLEN:70), en comparación con las del manual de Trimmomatic (http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/TrimmomaticManual_V0.32.pdf)
+
 #### 1.7. Eliminamos las lecturas que alineen con los genomas humano y phiX174 (Bowtie2)
 ```
 cd ~/Documents/unit_3_tarea
@@ -128,9 +129,47 @@ grep -c '>' ./virome_spades_meta_21/*.fasta
 > ./virome_spades_meta_21/first_pe_contigs.fasta:14591
 > ./virome_spades_meta_21/scaffolds.fasta:7142
 
-#### 2.2. Longitud y cobertura de los cotings
+#### 2.2. Longitud y cobertura de los contings y scaffolds
 ```
+grep '>' -m 5 ./virome_spades_default/*.fasta
+grep '>' -m 5 ./virome_spades_meta_33/*.fasta
+grep '>' -m 5 ./virome_spades_meta_21/*.fasta
+```
+| Default contings | meta_33 contings | meta_21 contings |
+| ------------- | ------------- | ------------- |
+| >NODE_1_length_87493_cov_11.125083 | >NODE_1_length_87399_cov_21.743287 | >NODE_1_length_87379_cov_23.132524 |
+| >NODE_2_length_70174_cov_7.587063 | >NODE_2_length_65568_cov_15.579110 | >NODE_2_length_59788_cov_14.221627 |
+| >NODE_3_length_66299_cov_6.577480 | >NODE_3_length_50892_cov_16.263198 | >NODE_3_length_48915_cov_12.334622 |
+| >NODE_4_length_51626_cov_4.664129 | >NODE_4_length_49862_cov_16.341187 | >NODE_4_length_35664_cov_80.708554 |
+| >NODE_5_length_51161_cov_7.061743 | >NODE_5_length_48968_cov_11.565791 | >NODE_5_length_34551_cov_16.385172 |
 
+
+| Default scaffolds | meta_33 scaffolds | meta_21 scaffolds |
+| ------------- | ------------- | ------------- |
+| >NODE_1_length_87493_cov_11.125083 | >NODE_1_length_87399_cov_21.743287 | >NODE_1_length_87379_cov_23.132524 |
+| >NODE_2_length_70174_cov_7.587063 | >NODE_2_length_65568_cov_15.579110 | >NODE_2_length_66226_cov_16.899857 |
+| >NODE_3_length_66299_cov_6.577480 | >NODE_3_length_50892_cov_16.263198 | >NODE_3_length_59788_cov_14.221627 |
+| >NODE_4_length_51626_cov_4.664129 | >NODE_4_length_49862_cov_16.341187 | >NODE_4_length_48915_cov_12.334622 |
+| >NODE_5_length_51161_cov_7.061743 | >NODE_5_length_48968_cov_11.565791 | >NODE_5_length_40347_cov_9.057878 |
+
+#### 2.3. Assembly stats
 ```
+chmod a+x contigstats.py
+python contigstats.py virome_spades_*/*.fasta
+```
+| sample | contigs | min | max | mean | n50 | bases | non_standard_bases |
+| ------------- | ------------- | ------------- |------------- |------------- |------------- |------------- |------------- |
+virome_spades_default/before_rr.fasta | 4026 | 128 | 67569 | 1031 | 1172 | 4150192 | 0 |
+virome_spades_default/contigs.fasta | 3973 | 128 | 87493 | 1044 | 1200 | 4146223 | 0 |
+virome_spades_default/scaffolds.fasta | 3886 | 128 | 87493 | 1067 | 1284 | 4147575 | 1352 |
+virome_spades_meta_21/before_rr.fasta | 9002 | 22 | 33760 | 544 | 611 | 4901025 | 0 |
+virome_spades_meta_21/contigs.fasta | 7421 | 22 | 87379 | 660 | 752 | 4901404 | 0 |
+virome_spades_meta_21/first_pe_contigs.fasta | 14591 | 22 | 87136 | 476 | 772 | 6944615 | 0 |
+virome_spades_meta_21/scaffolds.fasta | 7142 | 22 | 87379 | 688 | 824 | 4910698 | 9313 |
+virome_spades_meta_33/before_rr.fasta | 7554 | 34 | 87399 | 631 | 649 | 4766605 | 0 |
+virome_spades_meta_33/contigs.fasta | 6687 | 34 | 87399 | 710 | 756 | 4747439 | 0 |
+virome_spades_meta_33/first_pe_contigs.fasta | 10295 | 34 | 75432 | 649 | 938 | 6685342 | 0 |
+virome_spades_meta_33/scaffolds.fasta | 6425 | 34 | 87399 | 740 | 817 | 4756939 | 9500 |
+
 
 ### 3.Comparación de las estrategias de ensamblado con QUAST
