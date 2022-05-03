@@ -211,6 +211,6 @@ Ejecutamos quast
 ```
 quast ./quast/contigs_default.fasta ./quast/scaffolds_default.fasta ./quast/contigs_meta_33.fasta ./quast/scaffolds_meta_33.fasta ./quast/contigs_meta_21.fasta ./quast/scaffolds_meta_21.fasta 
 ```
-![Screenshot](https://drive.google.com/file/d/15qW0py20tIAvZAK50phvFUpb7DpGDff6/view?usp=sharing)
+![Screenshot](https://github.com/Sofia-Gonzalez-Matatoros/METAG_unit_3/blob/0aef989106a94929e402ffbf780898665a2ee3df/Captura%20de%20pantalla%20de%202022-05-03%2019-49-33.png)
 
-![Screenshot](https://drive.google.com/file/d/1uei0SZ7pNrOGb8vvb2soLTwhjz3bxuZC/view?usp=sharing)
+![Screenshot](https://github.com/Sofia-Gonzalez-Matatoros/METAG_unit_3/blob/0aef989106a94929e402ffbf780898665a2ee3df/Captura%20de%20pantalla%20de%202022-05-03%2019-49-43.png)
