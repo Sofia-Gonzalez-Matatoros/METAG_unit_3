@@ -173,8 +173,30 @@ virome_spades_meta_33/scaffolds.fasta | 6425 | 34 | 87399 | 740 | 817 | 4756939 
 
 
 ### 3.Comparación de las estrategias de ensamblado con QUAST
-
-
+Nos descargamos Quast
+```
+cd /home/bgm/
+mkdir software
+cd software # This folder will store download programs
+wget https://downloads.sourceforge.net/project/quast/quast-5.0.2.tar.gz
+tar -xzf quast-5.0.2.tar.gz
+rm quast-5.0.2.tar.gz
+cd quast-5.0.2
+python setup.py install # for mac
+cd /home/bgm/
+mkdir bin
+cd bin # This folder will store symbolic links to program executables
+ln -s /home/bgm/software/quast-5.0.2/quast.py quast
+# edit /home/bgm/.bashrc with _vim_ or _nano_ and add the following line
+export PATH=/home/bgm/bin/:$PATH
+# This way, all executable that you link in the bin folder will be in the system path
+# Open a new terminal window/tab
+cd /home/bgm/software/quast-5.0.2/quast_libs/site_packages/jsontemplate
+# Always make a copy of the file you are going to modify
+cp jsontemplate.py jsontemplate_original.py
+sed s/cgi/html/g jsontemplate_original.py > jsontemplate.py
+```
+Creamos hipervínculos para no duplicar los datos
 ```
 cd /home/bgm/Documents/unit_3_tarea/
 mkdir quast
@@ -184,5 +206,11 @@ ln -rs ./virome_spades_meta_33/contigs.fasta ./quast/contigs_meta_33.fasta
 ln -rs ./virome_spades_meta_33/scaffolds.fasta ./quast/scaffolds_meta_33.fasta 
 ln -rs ./virome_spades_meta_21/contigs.fasta ./quast/contigs_meta_21.fasta 
 ln -rs ./virome_spades_meta_21/scaffolds.fasta ./quast/scaffolds_meta_21.fasta 
-
 ```
+Ejecutamos quast
+```
+quast ./quast/contigs_default.fasta ./quast/scaffolds_default.fasta ./quast/contigs_meta_33.fasta ./quast/scaffolds_meta_33.fasta ./quast/contigs_meta_21.fasta ./quast/scaffolds_meta_21.fasta 
+```
+![Screenshot](https://drive.google.com/file/d/15qW0py20tIAvZAK50phvFUpb7DpGDff6/view?usp=sharing)
+
+![Screenshot](https://drive.google.com/file/d/1uei0SZ7pNrOGb8vvb2soLTwhjz3bxuZC/view?usp=sharing)
