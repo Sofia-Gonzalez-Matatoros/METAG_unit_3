@@ -173,3 +173,16 @@ virome_spades_meta_33/scaffolds.fasta | 6425 | 34 | 87399 | 740 | 817 | 4756939 
 
 
 ### 3.Comparación de las estrategias de ensamblado con QUAST
+
+
+```
+cd /home/bgm/Documents/unit_3_tarea/
+mkdir quast
+ln -rs ./virome_spades_default/contigs.fasta ./quast/contigs_default.fasta 
+ln -rs ./virome_spades_default/scaffolds.fasta ./quast/scaffolds_default.fasta 
+ln -rs ./virome_spades_meta_33/contigs.fasta ./quast/contigs_meta_33.fasta 
+ln -rs ./virome_spades_meta_33/scaffolds.fasta ./quast/scaffolds_meta_33.fasta 
+ln -rs ./virome_spades_meta_21/contigs.fasta ./quast/contigs_meta_21.fasta 
+ln -rs ./virome_spades_meta_21/scaffolds.fasta ./quast/scaffolds_meta_21.fasta 
+
+```
