@@ -8,7 +8,7 @@ NOTE: In the quality filtering step, modify the MINLEN argument considering the 
 NOTE: Importantly, you do not have a reference genome for a metagenome.
 
 ### 1. Preprocesado
-#### 1.1. Descargar el dataset
+#### 1.1. Descargamos el dataset
 ```
 mkdir -p ~/Documents/unit_3_tarea
 mv ~/Downloads/virome.zip ~/Documents/unit_3_tarea
@@ -24,6 +24,7 @@ md5sum virome_R1.fastq
 md5sum virome_R2.fastq 
 ```
 > 28f0d0ace9fb45af8b2595cbc78fa2bd  virome_R2.fastq
+
 #### 1.3. Contamos el número de lecturas
 ```
 wc -l virome_R1.fastq | awk '{print $1/4}'
@@ -46,8 +47,11 @@ fastqc virome_R2.fastq -o virome_Quality/
 ![Screeshot](https://github.com/Sofia-Gonzalez-Matatoros/METAG_unit_3/blob/main/fotos.1.4/1.4/virome_R2.png)
 
 #### 1.5. Recortamos los extremos de baja calidad con Trimmomatic
+Vamos a probar con dos combinaciones de parámetros, SLIDINGWINDOW:4:15 MINLEN:36 y SLIDINGWINDOW:4:20 MINLEN:70.
 ```
 trimmomatic PE -phred33 virome_R1.fastq virome_R2.fastq virome_R1_qfa_paired.fq virome_R1_qfa_unpaired.fq virome_R2_qfa_paired.fq virome_R2_qfa_unpaired.fq SLIDINGWINDOW:4:15 MINLEN:36
+
+trimmomatic PE -phred33 virome_R1.fastq virome_R2.fastq virome_R1_qfb_paired.fq virome_R1_qf_unpaired.fq virome_R2_qfb_paired.fq virome_R2_qfb_unpaired.fq SLIDINGWINDOW:4:20 MINLEN:70
 
 trimmomatic PE -phred33 virome_R1.fastq virome_R2.fastq virome_R1_qfb_paired.fq virome_R1_qf_unpaired.fq virome_R2_qfb_paired.fq virome_R2_qfb_unpaired.fq SLIDINGWINDOW:4:20 MINLEN:70
 ```
@@ -73,7 +77,7 @@ fastqc virome_R2_qfb_paired.fq -o virome_QF_Quality
 
 Se observa que las lecturas con mejor calidad son las obtenidas con el protocolo de prácticas (SLIDINGWINDOW:4:20 MINLEN:70), en comparación con las del manual de Trimmomatic (http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/TrimmomaticManual_V0.32.pdf)
 
-#### 1.7. Eliminamos las lecturas que alineen con los genomas humano y phiX174 (Bowtie2)
+#### 1.7. Descontaminación: eliminamos las lecturas que alineen con los genomas humano y phiX174 usando Bowtie2
 ```
 cd ~/Documents/unit_3_tarea
 cp ~/Documents/unit_3/
@@ -88,17 +92,19 @@ bowtie2 -x human-phix174 -1 virome_R1_qfb_paired.fq -2 virome_R2_qfb_paired.fq -
 ```
 Nótese que el índice human-phiX174 está subido a moodle.
 
-#### 1.8. Contamos cuántas lecturas nos quedan
+#### 1.8. Contamos cuántas lecturas nos quedan tras la descontaminación
 ```
 wc -l *clean.* | awk '{print $1/4}'
 ```
-> 80761
+> 80761 #lines
 > 
-> 80761
+> 80761 #words
 > 
-> 161522
+> 161522 #characters
 
 ### 2. Ensamblado con SPAdes
+Vamos a probar hasta tres ensamblados
+
 ```
 spades.py -m 3 -t 2 -1 virome_clean.1.fq -2 virome_clean.2.fq -o virome_spades_default
 spades.py --meta -m 3 -t 2 -1 virome_clean.1.fq -2 virome_clean.2.fq -o virome_spades_meta_33 -k33
@@ -159,21 +165,16 @@ python contigstats.py virome_spades_*/*.fasta
 ```
 | sample | contigs | min | max | mean | n50 | bases | non_standard_bases |
 | ------------- | ------------- | ------------- |------------- |------------- |------------- |------------- |------------- |
-virome_spades_default/before_rr.fasta | 4026 | 128 | 67569 | 1031 | 1172 | 4150192 | 0 |
 virome_spades_default/contigs.fasta | 3973 | 128 | 87493 | 1044 | 1200 | 4146223 | 0 |
 virome_spades_default/scaffolds.fasta | 3886 | 128 | 87493 | 1067 | 1284 | 4147575 | 1352 |
-virome_spades_meta_21/before_rr.fasta | 9002 | 22 | 33760 | 544 | 611 | 4901025 | 0 |
 virome_spades_meta_21/contigs.fasta | 7421 | 22 | 87379 | 660 | 752 | 4901404 | 0 |
-virome_spades_meta_21/first_pe_contigs.fasta | 14591 | 22 | 87136 | 476 | 772 | 6944615 | 0 |
 virome_spades_meta_21/scaffolds.fasta | 7142 | 22 | 87379 | 688 | 824 | 4910698 | 9313 |
-virome_spades_meta_33/before_rr.fasta | 7554 | 34 | 87399 | 631 | 649 | 4766605 | 0 |
 virome_spades_meta_33/contigs.fasta | 6687 | 34 | 87399 | 710 | 756 | 4747439 | 0 |
-virome_spades_meta_33/first_pe_contigs.fasta | 10295 | 34 | 75432 | 649 | 938 | 6685342 | 0 |
 virome_spades_meta_33/scaffolds.fasta | 6425 | 34 | 87399 | 740 | 817 | 4756939 | 9500 |
 
-
+La longitud media de los contings es (1044+660+710)/3 = 805. Considerando que las lecturas que presenten la mitad de esta longitud tendrán una calidad aceptable, MINLEN se establecerá en 403.
 ### 3.Comparación de las estrategias de ensamblado con QUAST
-Nos descargamos Quast
+En primer lugar hay que descargarse Quast en la máquina virtual porque la interfaz Web está dando problemas.
 ```
 cd /home/bgm/
 mkdir software
@@ -196,7 +197,7 @@ cd /home/bgm/software/quast-5.0.2/quast_libs/site_packages/jsontemplate
 cp jsontemplate.py jsontemplate_original.py
 sed s/cgi/html/g jsontemplate_original.py > jsontemplate.py
 ```
-Creamos hipervínculos para no duplicar los datos
+Vamos a crear una carpeta con todo lo necesaria para quast para que sea más fácil de ejecutar. Sin embargo, para evitar duplicar datos vamos a crear hipervínculos a los ficheros con los contingsy scaffolds.
 ```
 cd /home/bgm/Documents/unit_3_tarea/
 mkdir quast
