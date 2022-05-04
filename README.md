@@ -1,7 +1,7 @@
 # METAG_unit_3. Sofía González Matatoros
 ## Fecha: 20/05/2022
 ## Ejercicio
-Repeat all the steps with a viral metagenome from a human saliva sample (Virome.zip in Unit 3 of Moodle). Compare different de novo assemblies options (try _--meta--) or different kmer values. You must perform at least 3 different assemblies. Write a brief summary describing the bioinformatic pipeline you have followed (trimming, decontamination, improve in quality, number of reads remove in each step, etc.). Compare different de novo assemblies with QUAST and choose the best base on the obtained metrics.
+Repeat all the steps with a viral metagenome from a human saliva sample (virome.zip in Unit 3 of Moodle). Compare different de novo assemblies options (try _--meta--) or different kmer values. You must perform at least 3 different assemblies. Write a brief summary describing the bioinformatic pipeline you have followed (trimming, decontamination, improve in quality, number of reads remove in each step, etc.). Compare different de novo assemblies with QUAST and choose the best base on the obtained metrics.
 
 NOTE: In the quality filtering step, modify the MINLEN argument considering the original read length. Consider that reads with a minimum of 50% of the average original size are ok for subsequent analyses.
 
@@ -47,13 +47,26 @@ fastqc virome_R2.fastq -o virome_Quality/
 ![Screeshot](https://github.com/Sofia-Gonzalez-Matatoros/METAG_unit_3/blob/main/fotos.1.4/1.4/virome_R2.png)
 
 #### 1.5. Recortamos los extremos de baja calidad con Trimmomatic
-Vamos a probar con dos combinaciones de parámetros, SLIDINGWINDOW:4:15 MINLEN:36 y SLIDINGWINDOW:4:20 MINLEN:70.
+
+Para ello primeramente vemos la longitud media de nuestras lecturas.
+```
+awk '{if(NR%4==2) {count++; bases += length} } END{print bases/count}' virome_R1.fastq
+```
+> 298.939
+```
+awk '{if(NR%4==2) {count++; bases += length} } END{print bases/count}' virome_R2.fastq
+```
+> 299.249
+
+La longitud media de los contings es 298 aproximadamente. Considerando que las lecturas que presenten la mitad de esta longitud tendrán una calidad aceptable, MINLEN se establecerá en 149.
+
+Vamos a probar con tres combinaciones de parámetros, SLIDINGWINDOW:4:15 MINLEN:36 (la recomendada por el manueal de Trimmomatic), SLIDINGWINDOW:4:20 MINLEN:70 (la utilizada en la práctica en aula) y SLIDINGWINDOW:4:20 MINLEN:149 (adaptada a la longitud de nuestras lecturas)
 ```
 trimmomatic PE -phred33 virome_R1.fastq virome_R2.fastq virome_R1_qfa_paired.fq virome_R1_qfa_unpaired.fq virome_R2_qfa_paired.fq virome_R2_qfa_unpaired.fq SLIDINGWINDOW:4:15 MINLEN:36
 
-trimmomatic PE -phred33 virome_R1.fastq virome_R2.fastq virome_R1_qfb_paired.fq virome_R1_qf_unpaired.fq virome_R2_qfb_paired.fq virome_R2_qfb_unpaired.fq SLIDINGWINDOW:4:20 MINLEN:70
+trimmomatic PE -phred33 virome_R1.fastq virome_R2.fastq virome_R1_qfb_paired.fq virome_R1_qfb_unpaired.fq virome_R2_qfb_paired.fq virome_R2_qfb_unpaired.fq SLIDINGWINDOW:4:20 MINLEN:70
 
-trimmomatic PE -phred33 virome_R1.fastq virome_R2.fastq virome_R1_qfb_paired.fq virome_R1_qf_unpaired.fq virome_R2_qfb_paired.fq virome_R2_qfb_unpaired.fq SLIDINGWINDOW:4:20 MINLEN:70
+trimmomatic PE -phred33 virome_R1.fastq virome_R2.fastq virome_R1_qfc_paired.fq virome_R1_qfc_unpaired.fq virome_R2_qfc_paired.fq virome_R2_qfc_unpaired.fq SLIDINGWINDOW:4:20 MINLEN:149
 ```
 #### 1.6. Comprobamos si la calidad ha mejorado y cuánto ha mejorado con cada uno de los parámetros
 ```
@@ -62,6 +75,8 @@ fastqc virome_R1_qfa_paired.fq -o virome_QF_Quality
 fastqc virome_R2_qfa_paired.fq -o virome_QF_Quality
 fastqc virome_R1_qfb_paired.fq -o virome_QF_Quality
 fastqc virome_R2_qfb_paired.fq -o virome_QF_Quality
+fastqc virome_R1_qfc_paired.fq -o virome_QF_Quality
+fastqc virome_R2_qfc_paired.fq -o virome_QF_Quality
 ```
 **Calidad R1 SLIDINGWINDOW:4:15 MINLEN:36**
 ![Screenshot](https://github.com/Sofia-Gonzalez-Matatoros/METAG_unit_3/blob/main/fotos.1.6/1.6/r1a.png)
@@ -75,7 +90,7 @@ fastqc virome_R2_qfb_paired.fq -o virome_QF_Quality
 **Calidad R2 SLIDINGWINDOW:4:20 MINLEN:70**
 ![Screenshot](https://github.com/Sofia-Gonzalez-Matatoros/METAG_unit_3/blob/main/fotos.1.6/1.6/r2b.png)
 
-Se observa que las lecturas con mejor calidad son las obtenidas con el protocolo de prácticas (SLIDINGWINDOW:4:20 MINLEN:70), en comparación con las del manual de Trimmomatic (http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/TrimmomaticManual_V0.32.pdf)
+Se observa que las mejores calidades se consiguen con SLIDINGWINDOW:4:20 MINLEN:149
 
 #### 1.7. Descontaminación: eliminamos las lecturas que alineen con los genomas humano y phiX174 usando Bowtie2
 ```
@@ -88,7 +103,7 @@ unzip Index.zip
 cd Index
 mv *.bt2 ../
 cd ..
-bowtie2 -x human-phix174 -1 virome_R1_qfb_paired.fq -2 virome_R2_qfb_paired.fq --un-conc virome_clean.fq -S tmp.sam
+bowtie2 -x human-phix174 -1 virome_R1_qfc_paired.fq -2 virome_R2_qfc_paired.fq --un-conc virome_clean.fq -S tmp.sam
 ```
 Nótese que el índice human-phiX174 está subido a moodle.
 
@@ -96,11 +111,9 @@ Nótese que el índice human-phiX174 está subido a moodle.
 ```
 wc -l *clean.* | awk '{print $1/4}'
 ```
-> 80761 #lines
-> 
-> 80761 #words
-> 
-> 161522 #characters
+> 56474
+> 56474
+> 112948
 
 ### 2. Ensamblado con SPAdes
 Vamos a probar hasta tres ensamblados
@@ -108,7 +121,7 @@ Vamos a probar hasta tres ensamblados
 ```
 spades.py -m 3 -t 2 -1 virome_clean.1.fq -2 virome_clean.2.fq -o virome_spades_default
 spades.py --meta -m 3 -t 2 -1 virome_clean.1.fq -2 virome_clean.2.fq -o virome_spades_meta_33 -k33
-spades.py --meta -m 3 -t 2 -1 virome_clean.1.fq -2 virome_clean.2.fq -o virome_spades_meta_21 -k21
+spades.py --meta -m 3 -t 2 -1 virome_clean.1.fq -2 virome_clean.2.fq -o virome_spades_meta_21 -k55
 ```
 #### 2.1. Contamos el número de contigs y scaffolds
 
@@ -128,7 +141,7 @@ grep -c '>' ./virome_spades_meta_33/*.fasta
 > ./virome_spades_meta_33/scaffolds.fasta:6425
 
 ```
-grep -c '>' ./virome_spades_meta_21/*.fasta
+grep -c '>' ./virome_spades_meta_55/*.fasta
 ```
 > ./virome_spades_meta_21/before_rr.fasta:9002
 > ./virome_spades_meta_21/contigs.fasta:7421
@@ -139,9 +152,9 @@ grep -c '>' ./virome_spades_meta_21/*.fasta
 ```
 grep '>' -m 5 ./virome_spades_default/*.fasta
 grep '>' -m 5 ./virome_spades_meta_33/*.fasta
-grep '>' -m 5 ./virome_spades_meta_21/*.fasta
+grep '>' -m 5 ./virome_spades_meta_55/*.fasta
 ```
-| Default contings | meta_33 contings | meta_21 contings |
+| Default contings | meta_33 contings | meta_55 contings |
 | ------------- | ------------- | ------------- |
 | >NODE_1_length_87493_cov_11.125083 | >NODE_1_length_87399_cov_21.743287 | >NODE_1_length_87379_cov_23.132524 |
 | >NODE_2_length_70174_cov_7.587063 | >NODE_2_length_65568_cov_15.579110 | >NODE_2_length_59788_cov_14.221627 |
@@ -150,7 +163,7 @@ grep '>' -m 5 ./virome_spades_meta_21/*.fasta
 | >NODE_5_length_51161_cov_7.061743 | >NODE_5_length_48968_cov_11.565791 | >NODE_5_length_34551_cov_16.385172 |
 
 
-| Default scaffolds | meta_33 scaffolds | meta_21 scaffolds |
+| Default scaffolds | meta_33 scaffolds | meta_55 scaffolds |
 | ------------- | ------------- | ------------- |
 | >NODE_1_length_87493_cov_11.125083 | >NODE_1_length_87399_cov_21.743287 | >NODE_1_length_87379_cov_23.132524 |
 | >NODE_2_length_70174_cov_7.587063 | >NODE_2_length_65568_cov_15.579110 | >NODE_2_length_66226_cov_16.899857 |
@@ -172,7 +185,7 @@ virome_spades_meta_21/scaffolds.fasta | 7142 | 22 | 87379 | 688 | 824 | 4910698 
 virome_spades_meta_33/contigs.fasta | 6687 | 34 | 87399 | 710 | 756 | 4747439 | 0 |
 virome_spades_meta_33/scaffolds.fasta | 6425 | 34 | 87399 | 740 | 817 | 4756939 | 9500 |
 
-La longitud media de los contings es (1044+660+710)/3 = 805. Considerando que las lecturas que presenten la mitad de esta longitud tendrán una calidad aceptable, MINLEN se establecerá en 403.
+
 ### 3.Comparación de las estrategias de ensamblado con QUAST
 En primer lugar hay que descargarse Quast en la máquina virtual porque la interfaz Web está dando problemas.
 ```
