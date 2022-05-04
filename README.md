@@ -127,32 +127,33 @@ Vamos a probar hasta tres ensamblados
 ```
 spades.py -m 3 -t 2 -1 virome_clean.1.fq -2 virome_clean.2.fq -o virome_spades_default
 spades.py --meta -m 3 -t 2 -1 virome_clean.1.fq -2 virome_clean.2.fq -o virome_spades_meta_33 -k33
-spades.py --meta -m 3 -t 2 -1 virome_clean.1.fq -2 virome_clean.2.fq -o virome_spades_meta_21 -k55
+spades.py --meta -m 3 -t 2 -1 virome_clean.1.fq -2 virome_clean.2.fq -o virome_spades_meta_55 -k55
 ```
 #### 2.1. Contamos el número de contigs y scaffolds
 
 ```
 grep -c '>' ./virome_spades_default/*.fasta
 ```
-> ./virome_spades_default/before_rr.fasta:4026
-> ./virome_spades_default/contigs.fasta:3973
-> ./virome_spades_default/scaffolds.fasta:3886
+> ./virome_spades_default/before_rr.fasta:3619
+> ./virome_spades_default/contigs.fasta:3584
+> ./virome_spades_default/scaffolds.fasta:3515
 
 ```
 grep -c '>' ./virome_spades_meta_33/*.fasta
 ```
-> ./virome_spades_meta_33/before_rr.fasta:7554
-> ./virome_spades_meta_33/contigs.fasta:6687
-> ./virome_spades_meta_33/first_pe_contigs.fasta:10295
-> ./virome_spades_meta_33/scaffolds.fasta:6425
+> ./virome_spades_meta_33/before_rr.fasta:6731
+> ./virome_spades_meta_33/contigs.fasta:6136
+> ./virome_spades_meta_33/first_pe_contigs.fasta:8811
+> ./virome_spades_meta_33/scaffolds.fasta:5962
 
 ```
 grep -c '>' ./virome_spades_meta_55/*.fasta
 ```
-> ./virome_spades_meta_21/before_rr.fasta:9002
-> ./virome_spades_meta_21/contigs.fasta:7421
-> ./virome_spades_meta_21/first_pe_contigs.fasta:14591
-> ./virome_spades_meta_21/scaffolds.fasta:7142
+/virome_spades_meta_55/before_rr.fasta:5208
+./virome_spades_meta_55/contigs.fasta:4967
+./virome_spades_meta_55/first_pe_contigs.fasta:6086
+./virome_spades_meta_55/scaffolds.fasta:4864
+
 
 #### 2.2. Longitud y cobertura de los contings y scaffolds
 ```
