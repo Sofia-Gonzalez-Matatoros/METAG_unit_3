@@ -84,11 +84,17 @@ fastqc virome_R2_qfc_paired.fq -o virome_QF_Quality
 **Calidad R1 SLIDINGWINDOW:4:20 MINLEN:70**
 ![Screenshot](https://github.com/Sofia-Gonzalez-Matatoros/METAG_unit_3/blob/main/fotos.1.6/1.6/r1b.png)
 
+**Calidad R1 SLIDINGWINDOW:4:20 MINLEN:149**
+![Screenshot](https://github.com/Sofia-Gonzalez-Matatoros/METAG_unit_3/blob/ef840fa874ca888726676b2d185319a72a4db241/fotos.1.6/1.6/r1c.png)
+
 **Calidad R2 SLIDINGWINDOW:4:15 MINLEN:36**
 ![Screenshot](https://github.com/Sofia-Gonzalez-Matatoros/METAG_unit_3/blob/main/fotos.1.6/1.6/r2a.png)
 
 **Calidad R2 SLIDINGWINDOW:4:20 MINLEN:70**
 ![Screenshot](https://github.com/Sofia-Gonzalez-Matatoros/METAG_unit_3/blob/main/fotos.1.6/1.6/r2b.png)
+
+**Calidad R2 SLIDINGWINDOW:4:20 MINLEN:149**
+![Screenshot](https://github.com/Sofia-Gonzalez-Matatoros/METAG_unit_3/blob/ef840fa874ca888726676b2d185319a72a4db241/fotos.1.6/1.6/r2c.png)
 
 Se observa que las mejores calidades se consiguen con SLIDINGWINDOW:4:20 MINLEN:149
 
