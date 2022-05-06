@@ -233,6 +233,6 @@ Ejecutamos quast
 ```
 quast ./quast/contigs_default.fasta ./quast/scaffolds_default.fasta ./quast/contigs_meta_33.fasta ./quast/scaffolds_meta_33.fasta ./quast/contigs_meta_55.fasta ./quast/scaffolds_meta_55.fasta 
 ```
-![Screenshot](https://github.com/Sofia-Gonzalez-Matatoros/METAG_unit_3/blob/0aef989106a94929e402ffbf780898665a2ee3df/Captura%20de%20pantalla%20de%202022-05-03%2019-49-33.png)
+![Screenshot](https://github.com/Sofia-Gonzalez-Matatoros/METAG_unit_3/blob/640fbaaae33a7e22834cfee4b863195ad255733a/fotos.3/cumulative.png)
 
-![Screenshot](https://github.com/Sofia-Gonzalez-Matatoros/METAG_unit_3/blob/0aef989106a94929e402ffbf780898665a2ee3df/Captura%20de%20pantalla%20de%202022-05-03%2019-49-43.png)
+![Screenshot](https://github.com/Sofia-Gonzalez-Matatoros/METAG_unit_3/blob/640fbaaae33a7e22834cfee4b863195ad255733a/fotos.3/stats.png)
