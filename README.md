@@ -149,10 +149,10 @@ grep -c '>' ./virome_spades_meta_33/*.fasta
 ```
 grep -c '>' ./virome_spades_meta_55/*.fasta
 ```
-/virome_spades_meta_55/before_rr.fasta:5208
-./virome_spades_meta_55/contigs.fasta:4967
-./virome_spades_meta_55/first_pe_contigs.fasta:6086
-./virome_spades_meta_55/scaffolds.fasta:4864
+> ./virome_spades_meta_55/before_rr.fasta:5208
+> ./virome_spades_meta_55/contigs.fasta:4967
+> ./virome_spades_meta_55/first_pe_contigs.fasta:6086
+> ./virome_spades_meta_55/scaffolds.fasta:4864
 
 
 #### 2.2. Longitud y cobertura de los contings y scaffolds
@@ -163,20 +163,20 @@ grep '>' -m 5 ./virome_spades_meta_55/*.fasta
 ```
 | Default contings | meta_33 contings | meta_55 contings |
 | ------------- | ------------- | ------------- |
-| >NODE_1_length_87493_cov_11.125083 | >NODE_1_length_87399_cov_21.743287 | >NODE_1_length_87379_cov_23.132524 |
-| >NODE_2_length_70174_cov_7.587063 | >NODE_2_length_65568_cov_15.579110 | >NODE_2_length_59788_cov_14.221627 |
-| >NODE_3_length_66299_cov_6.577480 | >NODE_3_length_50892_cov_16.263198 | >NODE_3_length_48915_cov_12.334622 |
-| >NODE_4_length_51626_cov_4.664129 | >NODE_4_length_49862_cov_16.341187 | >NODE_4_length_35664_cov_80.708554 |
-| >NODE_5_length_51161_cov_7.061743 | >NODE_5_length_48968_cov_11.565791 | >NODE_5_length_34551_cov_16.385172 |
+| >NODE_1_length_87493_cov_10.414005 | >NODE_1_length_87399_cov_19.309983 | >NODE_1_length_87421_cov_17.225030 |
+| >NODE_2_length_68667_cov_7.370528 | >NODE_2_length_66117_cov_10.316552 | >NODE_2_length_69098_cov_12.816694 |
+| >NODE_3_length_66211_cov_4.952349 | >NODE_3_length_65493_cov_14.475588 | >NODE_3_length_66139_cov_9.040585 |
+| >NODE_4_length_51161_cov_6.060803 | >NODE_4_length_49898_cov_12.550065 | >NODE_4_length_48968_cov_8.896469 |
+| >NODE_5_length_48968_cov_5.306464 | >NODE_5_length_48968_cov_9.994421 | >NODE_5_length_43711_cov_11.021669 |
 
 
 | Default scaffolds | meta_33 scaffolds | meta_55 scaffolds |
 | ------------- | ------------- | ------------- |
-| >NODE_1_length_87493_cov_11.125083 | >NODE_1_length_87399_cov_21.743287 | >NODE_1_length_87379_cov_23.132524 |
-| >NODE_2_length_70174_cov_7.587063 | >NODE_2_length_65568_cov_15.579110 | >NODE_2_length_66226_cov_16.899857 |
-| >NODE_3_length_66299_cov_6.577480 | >NODE_3_length_50892_cov_16.263198 | >NODE_3_length_59788_cov_14.221627 |
-| >NODE_4_length_51626_cov_4.664129 | >NODE_4_length_49862_cov_16.341187 | >NODE_4_length_48915_cov_12.334622 |
-| >NODE_5_length_51161_cov_7.061743 | >NODE_5_length_48968_cov_11.565791 | >NODE_5_length_40347_cov_9.057878 |
+| >NODE_1_length_87493_cov_10.414005 | >NODE_1_length_87399_cov_19.309983 | >NODE_1_length_87421_cov_17.225030 |
+| >NODE_2_length_68667_cov_7.370528 | >NODE_2_length_66117_cov_10.316552 | >NODE_2_length_69098_cov_12.816694 |
+| >NODE_3_length_66211_cov_4.952349 | >NODE_3_length_65493_cov_14.475588 | >NODE_3_length_66139_cov_9.040585 |
+| >NODE_4_length_51161_cov_6.060803 | >NODE_4_length_49898_cov_12.550065 | >NODE_4_length_48968_cov_8.896469 |
+| >NODE_5_length_48968_cov_5.306464 | >NODE_5_length_48968_cov_9.994421 | >NODE_5_length_43711_cov_11.021669 |
 
 #### 2.3. Assembly stats
 ```
@@ -185,13 +185,14 @@ python contigstats.py virome_spades_*/*.fasta
 ```
 | sample | contigs | min | max | mean | n50 | bases | non_standard_bases |
 | ------------- | ------------- | ------------- |------------- |------------- |------------- |------------- |------------- |
-virome_spades_default/contigs.fasta | 3973 | 128 | 87493 | 1044 | 1200 | 4146223 | 0 |
-virome_spades_default/scaffolds.fasta | 3886 | 128 | 87493 | 1067 | 1284 | 4147575 | 1352 |
-virome_spades_meta_21/contigs.fasta | 7421 | 22 | 87379 | 660 | 752 | 4901404 | 0 |
-virome_spades_meta_21/scaffolds.fasta | 7142 | 22 | 87379 | 688 | 824 | 4910698 | 9313 |
-virome_spades_meta_33/contigs.fasta | 6687 | 34 | 87399 | 710 | 756 | 4747439 | 0 |
-virome_spades_meta_33/scaffolds.fasta | 6425 | 34 | 87399 | 740 | 817 | 4756939 | 9500 |
-
+| virome_spades_default/contigs.fasta | 3584 | 128 | 87493 | 1005 | 1080 | 3602288 | 0 |
+| virome_spades_default/scaffolds.fasta | 3515 | 128 | 87493 | 1025 | 1127 | 3603056 | 768 |
+| virome_spades_meta_21/contigs.fasta | 4967 | 56 | 87421 | 735 | 704 | 3648784 | 0 |
+| virome_spades_meta_21/scaffolds.fasta | 4864 | 56 | 87421 | 751 | 733 | 3650620 | 1836 |
+| virome_spades_meta_33/contigs.fasta | 6136 | 34 | 87399 | 687 | 691 | 4212765 | 0 |
+| virome_spades_meta_33/scaffolds.fasta | 5962 | 34 | 87399 | 707 | 727 | 4216704 | 3939 |
+| virome_spades_meta_55/contigs.fasta | 4967 | 56 | 87421 | 735 | 704 | 3648784 | 0 |
+| virome_spades_meta_55/scaffolds.fasta | 4864 | 56 | 87421 | 751 | 733 | 3650620 | 1836 |
 
 ### 3.Comparación de las estrategias de ensamblado con QUAST
 En primer lugar hay que descargarse Quast en la máquina virtual porque la interfaz Web está dando problemas.
@@ -225,12 +226,12 @@ ln -rs ./virome_spades_default/contigs.fasta ./quast/contigs_default.fasta
 ln -rs ./virome_spades_default/scaffolds.fasta ./quast/scaffolds_default.fasta 
 ln -rs ./virome_spades_meta_33/contigs.fasta ./quast/contigs_meta_33.fasta 
 ln -rs ./virome_spades_meta_33/scaffolds.fasta ./quast/scaffolds_meta_33.fasta 
-ln -rs ./virome_spades_meta_21/contigs.fasta ./quast/contigs_meta_21.fasta 
-ln -rs ./virome_spades_meta_21/scaffolds.fasta ./quast/scaffolds_meta_21.fasta 
+ln -rs ./virome_spades_meta_55/contigs.fasta ./quast/contigs_meta_55.fasta 
+ln -rs ./virome_spades_meta_55/scaffolds.fasta ./quast/scaffolds_meta_55.fasta 
 ```
 Ejecutamos quast
 ```
-quast ./quast/contigs_default.fasta ./quast/scaffolds_default.fasta ./quast/contigs_meta_33.fasta ./quast/scaffolds_meta_33.fasta ./quast/contigs_meta_21.fasta ./quast/scaffolds_meta_21.fasta 
+quast ./quast/contigs_default.fasta ./quast/scaffolds_default.fasta ./quast/contigs_meta_33.fasta ./quast/scaffolds_meta_33.fasta ./quast/contigs_meta_55.fasta ./quast/scaffolds_meta_55.fasta 
 ```
 ![Screenshot](https://github.com/Sofia-Gonzalez-Matatoros/METAG_unit_3/blob/0aef989106a94929e402ffbf780898665a2ee3df/Captura%20de%20pantalla%20de%202022-05-03%2019-49-33.png)
 
