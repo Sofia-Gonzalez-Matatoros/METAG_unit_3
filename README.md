@@ -179,6 +179,7 @@ grep '>' -m 5 ./virome_spades_meta_55/*.fasta
 | >NODE_5_length_48968_cov_5.306464 | >NODE_5_length_48968_cov_9.994421 | >NODE_5_length_43711_cov_11.021669 |
 
 #### 2.3. Assembly stats
+> Comprobar esto
 ```
 chmod a+x contigstats.py
 python contigstats.py virome_spades_*/*.fasta
@@ -239,3 +240,14 @@ quast ./quast/contigs_default.fasta ./quast/scaffolds_default.fasta ./quast/cont
 
 #### 3.1. ¿Cuál es la mejor estrategia de ensamblado?
 Compare different de novo assemblies with QUAST and choose the best based on the obtained metrics (smaller number of contigs, higher N50, smaller L50, longest total assembly length, etc.).
+
+Al observar la gráfica se comprueba que:
+
+* La estrategia con el menor número de cotings es *cotings_meta_55*, seguida de *cotings_meta_33* y *cotings_default*.
+* La estrategia con el mayor N50 es *cotings_default*, seguida de *cotings_meta_55* y *cotings_meta_33*.
+* La estrategia con el menor L50 es *cotings_meta_55*, seguida de *cotings_default* y *cotings_meta_33*.
+* La estrategia con la mayor longitud acumulada *cotings_default*, seguida de *cotings_meta_33* y *cotings_meta_55*.
+
+Tras esta comparativa queda claro que la peor estrategia es *cotings_meta_33*, mientras que *cotings_default* y *cotings_meta_55* aparecen relativamente igualadas. Para desempatar vamos a fijarnos en las métricas N50 y L50.
+
+N50 hace referencia a la longitud de los contigs, de manera que usando contigs de igual o mayor tamaño se cubre la mitad del genoma, mientras que L50 indica el número de cotings pequeños que hay que sumar para poder cubrir la mitad del genoma.
