@@ -236,3 +236,6 @@ quast ./quast/contigs_default.fasta ./quast/scaffolds_default.fasta ./quast/cont
 ![Screenshot](https://github.com/Sofia-Gonzalez-Matatoros/METAG_unit_3/blob/640fbaaae33a7e22834cfee4b863195ad255733a/fotos.3/cumulative.png)
 
 ![Screenshot](https://github.com/Sofia-Gonzalez-Matatoros/METAG_unit_3/blob/640fbaaae33a7e22834cfee4b863195ad255733a/fotos.3/stats.png)
+
+#### 3.1. ¿Cuál es la mejor estrategia de ensamblado?
+Compare different de novo assemblies with QUAST and choose the best based on the obtained metrics (smaller number of contigs, higher N50, smaller L50, longest total assembly length, etc.).
