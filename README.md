@@ -178,23 +178,6 @@ grep '>' -m 5 ./virome_spades_meta_55/*.fasta
 | >NODE_4_length_51161_cov_6.060803 | >NODE_4_length_49898_cov_12.550065 | >NODE_4_length_48968_cov_8.896469 |
 | >NODE_5_length_48968_cov_5.306464 | >NODE_5_length_48968_cov_9.994421 | >NODE_5_length_43711_cov_11.021669 |
 
-#### 2.3. Assembly stats
-> Comprobar esto
-```
-chmod a+x contigstats.py
-python contigstats.py virome_spades_*/*.fasta
-```
-| sample | contigs | min | max | mean | n50 | bases | non_standard_bases |
-| ------------- | ------------- | ------------- |------------- |------------- |------------- |------------- |------------- |
-| virome_spades_default/contigs.fasta | 3584 | 128 | 87493 | 1005 | 1080 | 3602288 | 0 |
-| virome_spades_default/scaffolds.fasta | 3515 | 128 | 87493 | 1025 | 1127 | 3603056 | 768 |
-| virome_spades_meta_21/contigs.fasta | 4967 | 56 | 87421 | 735 | 704 | 3648784 | 0 |
-| virome_spades_meta_21/scaffolds.fasta | 4864 | 56 | 87421 | 751 | 733 | 3650620 | 1836 |
-| virome_spades_meta_33/contigs.fasta | 6136 | 34 | 87399 | 687 | 691 | 4212765 | 0 |
-| virome_spades_meta_33/scaffolds.fasta | 5962 | 34 | 87399 | 707 | 727 | 4216704 | 3939 |
-| virome_spades_meta_55/contigs.fasta | 4967 | 56 | 87421 | 735 | 704 | 3648784 | 0 |
-| virome_spades_meta_55/scaffolds.fasta | 4864 | 56 | 87421 | 751 | 733 | 3650620 | 1836 |
-
 ### 3.Comparación de las estrategias de ensamblado con QUAST
 En primer lugar hay que descargarse Quast en la máquina virtual porque la interfaz Web está dando problemas.
 ```
