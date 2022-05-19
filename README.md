@@ -233,4 +233,10 @@ Al observar la gráfica se comprueba que:
 
 Tras esta comparativa queda claro que la peor estrategia es *cotings_meta_33*, mientras que *cotings_default* y *cotings_meta_55* aparecen relativamente igualadas. Para desempatar vamos a fijarnos en las métricas N50 y L50.
 
-N50 hace referencia a la longitud de los contigs, de manera que usando contigs de igual o mayor tamaño se cubre la mitad del genoma, mientras que L50 indica el número de cotings pequeños que hay que sumar para poder cubrir la mitad del genoma.
+N50 hace referencia a la longitud de los contigs, de manera que usando contigs de igual o mayor tamaño se cubre la mitad del genoma, mientras que L50 indica el número de cotings pequeños que hay que sumar para poder cubrir la mitad del genoma. 
+
+| Estrategia | N50 | L50 |
+| ----- | ---- | ---- |
+| cotings_default | 1474 | 304 |
+| cotings_meta_33 | 1376 | 321 |
+| cotings_meta_55 | 1469 | 236 |
