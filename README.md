@@ -1,5 +1,11 @@
-# METAG_unit_3. Sofía González Matatoros
-## Fecha: 20/05/2022
+# METAG_unit_3. 
+
+Alumna: Sofía González Matatoros
+
+Fecha: 20/05/2022
+
+Enlace a github: https://github.com/Sofia-Gonzalez-Matatoros/METAG_unit_3.git
+
 ## Ejercicio
 Repeat all the steps with a viral metagenome from a human saliva sample (virome.zip in Unit 3 of Moodle). Compare different de novo assemblies options (try _--meta--) or different kmer values. You must perform at least 3 different assemblies. Write a brief summary describing the bioinformatic pipeline you have followed (trimming, decontamination, improve in quality, number of reads remove in each step, etc.). Compare different de novo assemblies with QUAST and choose the best base on the obtained metrics.
 
