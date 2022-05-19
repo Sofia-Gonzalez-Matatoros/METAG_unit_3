@@ -240,3 +240,8 @@ N50 hace referencia a la longitud de los contigs, de manera que usando contigs d
 | cotings_default | 1474 | 304 |
 | cotings_meta_33 | 1376 | 321 |
 | cotings_meta_55 | 1469 | 236 |
+
+* Para N50: *cotings_default* es 5 unidades mayor que *cotings_meta_55*
+* Para L50: *cotings_meta_55* es 68 unidades menor que *cotings_default*
+
+Teniendo en cuenta la diferencia de unidades para ambas métricas, se puede concluir que la mejor estrategia de ensamblado es *cotings_meta_55*
