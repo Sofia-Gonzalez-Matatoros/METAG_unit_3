@@ -102,7 +102,7 @@ fastqc virome_R2_qfc_paired.fq -o virome_QF_Quality
 **Calidad R2 SLIDINGWINDOW:4:20 MINLEN:149**
 ![Screenshot](https://github.com/Sofia-Gonzalez-Matatoros/METAG_unit_3/blob/ef840fa874ca888726676b2d185319a72a4db241/fotos.1.6/1.6/r2c.png)
 
-Se observa que las mejores calidades se consiguen con SLIDINGWINDOW:4:20 MINLEN:149
+Se observa que las mejores calidades se consiguen con SLIDINGWINDOW:4:20 MINLEN:149, por lo que los archivo que se utilizarán en los próximos pasos son virome_R1_qfc_paired.fq y virome_R2_qfc_paired.fq
 
 #### 1.7. Descontaminación: eliminamos las lecturas que alineen con los genomas humano y phiX174 usando Bowtie2
 ```
